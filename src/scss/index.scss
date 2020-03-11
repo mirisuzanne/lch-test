@@ -1,0 +1,72 @@
+@use '../../node_modules/accoutrement/sass/tools';
+@use '../../node_modules/cssremedy/css/remedy.css';
+
+.sr-only {
+  @include tools.is-hidden;
+}
+
+.demo {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+
+  header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25em;
+  }
+
+  h1 {
+    font-size: 1.5em;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 1em;
+    margin: 0;
+  }
+}
+
+.demo-grid {
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: repeat(auto-fit, minmax(30em, 1fr));
+
+  > section {
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+[data-lch] {
+  --clipped: var(--simple);
+  background-color: var(--hover, var(--result));
+
+  #lch:hover & {
+    --hover: var(--simple);
+  }
+}
+
+[style*='--clipped'] {
+  & + :not(&),
+  :not(&) + & {
+    border-left: 1px solid red;
+  }
+}
+
+.range {
+  &:hover {
+    outline: 3px solid white;
+  }
+}
+
+[style*='--hsl'] {
+  background-color: var(--hsl);
+}

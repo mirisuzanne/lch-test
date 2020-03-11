@@ -1,0 +1,37 @@
+{
+  "name": "chroma",
+  "version": "1.0.0",
+  "description": "testing lch conversion",
+  "main": "index.js",
+  "author": "Miriam Suzanne",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "sass": "sass src/scss:_css",
+    "eleventy": "eleventy",
+    "eleventy:serve": "eleventy --serve",
+    "watch:sass": "chokidar \"src/scss/**/*.scss\" -c \"yarn run-p sass\"",
+    "site:clean": "rm -rf ./_site/",
+    "assets:clean": "rm -rf ./_css/",
+    "serve": "npm-run-all build:assets build:site -p eleventy:serve watch:sass",
+    "build:site": "run-s site:clean",
+    "build:assets": "npm-run-all assets:clean sass",
+    "build": "run-s build:assets site:clean eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^0.10.0",
+    "accoutrement": "^2.1.3",
+    "chalk": "^3.0.0",
+    "chokidar-cli": "^2.1.0",
+    "chroma-js": "^2.1.0",
+    "core-js": "^3.6.4",
+    "cssremedy": "^0.1.0-beta.2",
+    "js-yaml": "^3.13.1",
+    "mathjs": "^6.6.1",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^1.32.0",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-terser": "^5.2.0",
+    "sass": "^1.26.2"
+  }
+}
