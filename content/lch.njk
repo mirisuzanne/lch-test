@@ -7,16 +7,49 @@ js:
   - index
 ---
 
+{% macro select(
+  label,
+  id,
+  values
+) %}
+  <label for="{{ id }}">{{ label }}</label>
+  <select name="{{ id }}" id="{{ id }}">
+    {% for value, name in values %}
+      <option
+        value="{{ value }}"
+        {{ 'selected' if loop.first else '' }}>
+        {{ name }}
+      </option>
+    {% endfor %}
+  </select>
+{% endmacro %}
+
 <header>
   <h1>
     Chroma/Saturation:
     <span id="chroma-value">{{ chroma }}</span>
   </h1>
 
-  <label for="chroma-range">
-    <span>Adjust Chroma/Saturation</span>
-    <input id="chroma-range" type="range" min="0" max="100" value="{{ chroma }}">
-  </label>
+  <details class="demo-settings">
+    <summary>Settings</summary>
+    <form class="dropdown">
+      <div class="field">
+        <label for="chroma-range">Chroma/Saturation</label>
+        <input id="chroma-range" type="range" min="0" max="100" value="{{ chroma }}">
+      </div>
+      <div class="field">
+        {{ select(
+          label='Out-Of-Gamut Colors',
+          id='out-of-gamut',
+          values={
+            'nothing': 'nothing',
+            'clipped': 'clipped RGB',
+            'relative': '"relative" RGB'
+          }
+        ) }}
+      </div>
+    </form>
+  </details>
 </header>
 
 {% macro label(

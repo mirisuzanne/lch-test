@@ -6,11 +6,42 @@
   <title>Chroma Testing</title>
   <link rel="stylesheet" href="/css/index.css">
 </head>
-<body >
-<h1>Hello World</h1>
+<body class="markdown">
+<h1>Exploring CIE lab/LCH Colors</h1>
 <ul>
-<li><a href="/lch/">lch demo</a></li>
+<li><a href="/lch/">Play with my (slow) LCH demo »</a></li>
+<li><a href="http://tristen.ca/hcl-picker/">&quot;HCL Picker&quot;</a></li>
+<li><a href="https://github.com/gka/chroma.js">chroma.js</a></li>
 </ul>
+<p>The CIE Lab/LCH color space --
+coming to CSS in
+<a href="https://www.w3.org/TR/css-color-4/">Color Module Level 4</a> --
+is <em>device-independent</em> and <em>perceptually uniform</em>.</p>
+<p>In the meantime,
+Sass could provide tools to describe color in Lab/LCH formats --
+taking advantage of the uniform space --
+and pre-compile the output into an <code>rgb()</code> format.</p>
+<p>That's great in theory,
+but the two color spaces don't align cleanly.
+Color conversion will need to follow the
+<a href="https://www.w3.org/TR/css-color-4/#valdef-color-profile-rendering-intent-relative-colorimetric"><em>relative-colorimetric</em></a>
+rendering intent:
+resolving out-of-gamut colors to their nearest boundary,
+without altering in-gamut values.</p>
+<p>For the demo,
+I've used a highly over-simplified approach
+to relative-colorimetric rendering --
+lowering the &quot;chroma&quot; value until the conversion is in-range.
+I don't think that's a real option,
+but neither is RGB clipping
+(the only option in <a href="https://github.com/gka/chroma.js">chroma.js</a>).</p>
+<p>You can toggle between the two options,
+or hide out-of-gamut-colors,
+in the demo &quot;settings&quot; menu.
+You can also change the chroma value --
+but give it time to update,
+especially at higher saturation levels.
+This isn't optimized for performance.</p>
 
 
 <!-- Scripts -->

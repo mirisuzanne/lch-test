@@ -227,6 +227,13 @@ category: legacy browsers
   width: 1px;
 }
 
+.markdown {
+  font-size: calc(1em + 1vw);
+  max-width: 40em;
+  margin: 0 auto;
+  padding: 1em;
+}
+
 .demo {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -236,11 +243,10 @@ category: legacy browsers
   align-items: center;
   display: flex;
   justify-content: space-between;
-  padding: 0.25em;
 }
 .demo h1 {
   font-size: 1.5em;
-  margin: 0;
+  margin: 0 1rem;
 }
 .demo h2 {
   font-size: 1em;
@@ -251,36 +257,60 @@ category: legacy browsers
   display: grid;
   grid-gap: 1em;
   grid-template-columns: repeat(auto-fit, minmax(30em, 1fr));
+  padding: 0.5rem;
 }
 .demo-grid > section {
   display: grid;
   grid-template-rows: auto 1fr;
 }
-
-table {
+.demo-grid table {
   border-spacing: 0;
   border-collapse: collapse;
   margin: 0;
+  border: 1px solid gray;
 }
 
 [data-lch] {
-  --clipped: var(--simple);
-  background-color: var(--hover, var(--result));
+  background-color: var(--in-gamut, var(--out-of-gamut));
 }
-#lch:hover [data-lch] {
-  --hover: var(--simple);
+[data-show=clipped] [data-lch] {
+  --out-of-gamut: var(--clipped);
+}
+[data-show=relative] [data-lch] {
+  --out-of-gamut: var(--relative);
 }
 
 [style*="--clipped"] + :not([style*="--clipped"]), :not([style*="--clipped"]) + [style*="--clipped"] {
-  border-left: 1px solid red;
-}
-
-.range:hover {
-  outline: 3px solid white;
+  border-left: 1px solid white;
 }
 
 [style*="--hsl"] {
   background-color: var(--hsl);
+}
+
+.demo-settings {
+  cursor: pointer;
+  position: relative;
+  padding: 0.5rem 1rem;
+}
+
+.dropdown {
+  background: white;
+  border: 1px solid;
+  padding: 1rem;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 100vh;
+  max-width: max-content;
+}
+
+.field {
+  margin: 0.5em 0;
+}
+
+label {
+  display: block;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -8,16 +8,49 @@
 </head>
 <body class="demo">
 
+
+
 <header>
   <h1>
     Chroma/Saturation:
     <span id="chroma-value">20</span>
   </h1>
 
-  <label for="chroma-range">
-    <span>Adjust Chroma/Saturation</span>
-    <input id="chroma-range" type="range" min="0" max="100" value="20">
-  </label>
+  <details class="demo-settings">
+    <summary>Settings</summary>
+    <form class="dropdown">
+      <div class="field">
+        <label for="chroma-range">Chroma/Saturation</label>
+        <input id="chroma-range" type="range" min="0" max="100" value="20">
+      </div>
+      <div class="field">
+        
+  <label for="out-of-gamut">Out-Of-Gamut Colors</label>
+  <select name="out-of-gamut" id="out-of-gamut">
+    
+      <option
+        value="nothing"
+        selected>
+        nothing
+      </option>
+    
+      <option
+        value="clipped"
+        >
+        clipped RGB
+      </option>
+    
+      <option
+        value="relative"
+        >
+        &quot;relative&quot; RGB
+      </option>
+    
+  </select>
+
+      </div>
+    </form>
+  </details>
 </header>
 
 
