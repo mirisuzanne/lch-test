@@ -276,8 +276,8 @@ category: legacy browsers
 [data-show=clipped] [data-lch] {
   --out-of-gamut: var(--clipped);
 }
-[data-show=relative] [data-lch] {
-  --out-of-gamut: var(--relative);
+[data-show=fixed] [data-lch] {
+  --out-of-gamut: var(--fixed);
 }
 
 [style*="--clipped"] + :not([style*="--clipped"]), :not([style*="--clipped"]) + [style*="--clipped"] {

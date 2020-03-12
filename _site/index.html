@@ -8,40 +8,58 @@
 </head>
 <body class="markdown">
 <h1>Exploring CIE lab/LCH Colors</h1>
+<p><a href="/lch/">Play with my (slow) LCH demo »</a></p>
+<h2>Other Resources:</h2>
 <ul>
-<li><a href="/lch/">Play with my (slow) LCH demo »</a></li>
-<li><a href="http://tristen.ca/hcl-picker/">&quot;HCL Picker&quot;</a></li>
+<li><a href="https://www.w3.org/TR/css-color-4/">Color Module Level 4</a></li>
+<li><a href="https://www.w3.org/Talks/2016/css4-color-talk/">The Evolution of CSS4 Color</a></li>
+<li><a href="https://stripe.com/blog/accessible-color-systems">Stripe Blog</a></li>
+<li><a href="http://tristen.ca/hcl-picker/">HCL Picker</a></li>
 <li><a href="https://github.com/gka/chroma.js">chroma.js</a></li>
 </ul>
+<h2>Notes:</h2>
 <p>The CIE Lab/LCH color space --
 coming to CSS in
 <a href="https://www.w3.org/TR/css-color-4/">Color Module Level 4</a> --
 is <em>device-independent</em> and <em>perceptually uniform</em>.</p>
-<p>In the meantime,
-Sass could provide tools to describe color in Lab/LCH formats --
-taking advantage of the uniform space --
-and pre-compile the output into an <code>rgb()</code> format.</p>
+<p>While we wait for browser implementations,
+Sass could provide basic Lab/LCH tools inside a module,
+to avoid naming conflicts with the eventual CSS functions.
+The Sass functions would
+pre-compile into an <code>rgb()</code> format  for output,
+making them usable right away.</p>
 <p>That's great in theory,
-but the two color spaces don't align cleanly.
+but the CIE &amp; sRGB color spaces don't align cleanly.
 Color conversion will need to follow the
 <a href="https://www.w3.org/TR/css-color-4/#valdef-color-profile-rendering-intent-relative-colorimetric"><em>relative-colorimetric</em></a>
 rendering intent:
-resolving out-of-gamut colors to their nearest boundary,
+resolving out-of-gamut colors
+to the nearest available sRGB color,
 without altering in-gamut values.</p>
-<p>For the demo,
-I've used a highly over-simplified approach
-to relative-colorimetric rendering --
-lowering the &quot;chroma&quot; value until the conversion is in-range.
-I don't think that's a real option,
-but neither is RGB clipping
-(the only option in <a href="https://github.com/gka/chroma.js">chroma.js</a>).</p>
-<p>You can toggle between the two options,
-or hide out-of-gamut-colors,
-in the demo &quot;settings&quot; menu.
-You can also change the chroma value --
-but give it time to update,
-especially at higher saturation levels.
-This isn't optimized for performance.</p>
+<p>I haven't yet found a description of <em>how</em>
+to achieve relative-colorimetric rendering.
+For this demo,
+I make an over-simplified gesture that direction --
+lowering the &quot;chroma&quot; value until
+the color is in-gamut.
+I don't think that's a real solution,
+but neither is the default RGB clipping
+used by <a href="https://github.com/gka/chroma.js">chroma.js</a>,
+which can  end up altering the hue
+in unpredicatble ways.</p>
+<p>You can toggle between the two options
+in the demo &quot;settings&quot; menu,
+or hide out-of-gamut-colors entirely.
+You can also change the overall chroma value --
+just give it time to update.
+This isn't optimized for performance,
+and the adjustments take more time
+at higher saturation levels.</p>
+<h2>ToDo:</h2>
+<ul>
+<li>Are there available algorythms for relative-colorimetric rendering?</li>
+<li>Can we use them?</li>
+</ul>
 
 
 <!-- Scripts -->

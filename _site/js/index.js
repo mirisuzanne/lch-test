@@ -12,16 +12,16 @@ const getLCH = (data) => data.split(',').map(((channel) => Number(channel)));
 const setLCH = (item, chroma) => {
   const LCH = getLCH(item.dataset.lch);
   if (chroma) { LCH[1] = chroma; }
-  const convert = relative(LCH);
+  const color = convert(LCH);
 
-  if (convert.clipped) {
-    item.style.setProperty('--relative', css(convert.final));
-    item.style.setProperty('--clipped', css(convert.sRGB));
+  if (color.clipped) {
+    item.style.setProperty('--fixed', css(color.final));
+    item.style.setProperty('--clipped', css(color.sRGB));
     item.style.removeProperty('--in-gamut');
   } else {
-    item.style.removeProperty('--relative');
+    item.style.removeProperty('--fixed');
     item.style.removeProperty('--clipped');
-    item.style.setProperty('--in-gamut', css(convert.final));
+    item.style.setProperty('--in-gamut', css(color.final));
   }
 }
 

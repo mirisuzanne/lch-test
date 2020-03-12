@@ -60,8 +60,8 @@
     --out-of-gamut: var(--clipped);
   }
 
-  [data-show='relative'] & {
-    --out-of-gamut: var(--relative);
+  [data-show='fixed'] & {
+    --out-of-gamut: var(--fixed);
   }
 }
 

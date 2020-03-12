@@ -230,17 +230,17 @@ const b_w = (sRGB) => {
   return false;
 }
 
-const adjust = (LCH) => {
-  const desaturate = [LCH[0], LCH[1] - 0.5, LCH[2]];
-  const sRGB = LCH_to_sRGB(desaturate);
+const desaturate = (LCH) => {
+  const adjusted = [LCH[0], LCH[1] - 0.5, LCH[2]];
+  const sRGB = LCH_to_sRGB(adjusted);
 
-  return is_clipped(sRGB) ? b_w(sRGB) || adjust(desaturate) : sRGB;
+  return is_clipped(sRGB) ? b_w(sRGB) || desaturate(adjusted) : sRGB;
 }
 
-const relative = (LCH) => {
+const convert = (LCH) => {
   const sRGB = LCH_to_sRGB(LCH);
   const clipped = is_clipped(sRGB) || false;
-  const final = clipped ? b_w(sRGB) || adjust(LCH) : sRGB;
+  const final = clipped ? b_w(sRGB) || desaturate(LCH) : sRGB;
   return {
       LCH,
       sRGB,
