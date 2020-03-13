@@ -8,7 +8,13 @@
 </head>
 <body class="markdown">
 <h1>Exploring CIE lab/LCH Colors</h1>
-<p><a href="/lch/">Play with my (slow) LCH demo »</a></p>
+<h2>Demos:</h2>
+<ul>
+<li><a href="/chroma/">by <code>chroma</code> »</a></li>
+<li><a href="/hue/">by <code>hue</code> »</a></li>
+</ul>
+<p>Note that <code>hsl</code> and <code>lch</code> map hues differently,
+so they aren't going to line up exactly here.</p>
 <h2>Other Resources:</h2>
 <ul>
 <li><a href="https://www.w3.org/TR/css-color-4/">Color Module Level 4</a></li>
@@ -36,30 +42,24 @@ rendering intent:
 resolving out-of-gamut colors
 to the nearest available sRGB color,
 without altering in-gamut values.</p>
-<p>I haven't yet found a description of <em>how</em>
-to achieve relative-colorimetric rendering.
-For this demo,
-I make an over-simplified gesture that direction --
-lowering the &quot;chroma&quot; value until
+<p>I make an attempt at that in my demos --
+locking both <code>hue</code> and <code>lightness</code> values,
+while lowering the <code>chroma</code> value until
 the color is in-gamut.
-I don't think that's a real solution,
-but neither is the default RGB clipping
-used by <a href="https://github.com/gka/chroma.js">chroma.js</a>,
-which can  end up altering the hue
+That seems to be the accepted solution,
+rather thanclipping RGB channels
+like <a href="https://github.com/gka/chroma.js">chroma.js</a>,
+which can end up altering the hue
 in unpredicatble ways.</p>
 <p>You can toggle between the two options
 in the demo &quot;settings&quot; menu,
 or hide out-of-gamut-colors entirely.
-You can also change the overall chroma value --
-just give it time to update.
+You can also change the overall <code>chroma</code> or <code>hue</code>) value --
+depending on the demo.
+Just give it time to update.
 This isn't optimized for performance,
 and the adjustments take more time
 at higher saturation levels.</p>
-<h2>ToDo:</h2>
-<ul>
-<li>Are there available algorythms for relative-colorimetric rendering?</li>
-<li>Can we use them?</li>
-</ul>
 
 
 <!-- Scripts -->

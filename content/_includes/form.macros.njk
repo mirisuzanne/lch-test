@@ -1,0 +1,54 @@
+{% macro field(
+  label,
+  id,
+  content
+) %}
+  <div class="field">
+    <label for="{{ id }}">{{ label }}</label>
+    {{ content | safe }}
+  </div>
+{% endmacro %}
+
+{% macro select(
+  label,
+  id,
+  values
+) %}
+  {%- set content -%}
+    <select name="{{ id }}" id="{{ id }}">
+      {% for value, name in values %}
+        <option
+          value="{{ value }}"
+          {{ 'selected' if loop.first else '' }}>
+          {{ name }}
+        </option>
+      {% endfor %}
+    </select>
+  {%- endset -%}
+  {{- field(label, id, content) -}}
+{% endmacro %}
+
+{% macro slider(
+  label,
+  id,
+  min=0,
+  max=100,
+  value=50
+) %}
+  {%- set content -%}
+    <input id="{{ id }}" type="range" min="{{ min }}" max="{{ max }}" value="{{ value }}">
+  {%- endset -%}
+  {{- field(label, id, content) -}}
+{% endmacro %}
+
+{% macro gamut_select() -%}
+  {{- select(
+    label='Out-Of-Gamut Colors',
+    id='out-of-gamut',
+    values={
+      'fixed': 'Desaturated RGB',
+      'hidden': 'Hidden',
+      'clipped': 'Clipped RGB'
+    }
+  ) -}}
+{%- endmacro %}

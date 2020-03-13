@@ -1,0 +1,50 @@
+---
+class: demo
+hue: 0
+js:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.6.1/math.min.js
+  - convert
+  - index
+---
+
+{% import "form.macros.njk" as form %}
+{% import "color.macros.njk" as color %}
+
+<header>
+  <h1>
+    Hue:
+    <span id="hue-value">{{ hue }}</span>
+  </h1>
+
+  <span>Hues don't align between LCH/HSL…</span>
+
+  {% set settings %}
+    {{ form.slider(
+      label='Hue',
+      id='hue-range',
+      max=360,
+      value=hue
+    ) }}
+    {{ form.gamut_select() }}
+  {% endset %}
+
+  {{ color.settings(settings) }}
+</header>
+
+<section class="demo-grid">
+  <section id="lch" data-show='fixed'>
+    <h2>HCL Lightness/Chroma</h2>
+    {{ color.hue_table(
+      format='lch',
+      hue=hue
+    ) }}
+  </section>
+
+  <section id="hsl" style="--h: {{ hue }}" data-show='fixed'>
+    <h2>HSL Lightness/Chroma</h2>
+    {{ color.hue_table(
+      format='hsl',
+      hue=hue
+    ) }}
+  </section>
+</section>

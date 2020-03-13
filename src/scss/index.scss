@@ -56,6 +56,10 @@
 [data-lch] {
   background-color: var(--in-gamut, var(--out-of-gamut));
 
+  [data-show='hidden'] & {
+    --out-of-gamut: transparent;
+  }
+
   [data-show='clipped'] & {
     --out-of-gamut: var(--clipped);
   }
@@ -67,8 +71,8 @@
 
 
 [style*='--clipped'] {
-  & + :not(&),
-  :not(&) + & {
+  table:hover & + :not(&),
+  table:hover :not(&) + & {
     border-left: 1px solid white;
   }
 }

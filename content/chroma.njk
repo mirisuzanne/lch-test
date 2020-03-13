@@ -1,0 +1,47 @@
+---
+class: demo
+chroma: 50
+js:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjs/6.6.1/math.min.js
+  - convert
+  - index
+---
+
+{% import "form.macros.njk" as form %}
+{% import "color.macros.njk" as color %}
+
+<header>
+  <h1>
+    Chroma/Saturation:
+    <span id="chroma-value">{{ chroma }}</span>
+  </h1>
+
+  {% set settings %}
+    {{ form.slider(
+      label='Chroma/Saturation',
+      id='chroma-range',
+      value=chroma
+    ) }}
+    {{ form.gamut_select() }}
+  {% endset %}
+
+  {{ color.settings(settings) }}
+</header>
+
+<section class="demo-grid">
+  <section id="lch" data-show='fixed'>
+    <h2>HCL Lightness/Hue</h2>
+    {{ color.chroma_table(
+      format='lch',
+      chroma=chroma
+    ) }}
+  </section>
+
+  <section id="hsl" style="--s: {{ chroma }}" data-show='fixed'>
+    <h2>HSL Lightness/Hue</h2>
+    {{ color.chroma_table(
+      format='hsl',
+      chroma=chroma
+    ) }}
+  </section>
+</section>

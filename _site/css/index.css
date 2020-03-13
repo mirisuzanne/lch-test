@@ -273,6 +273,9 @@ category: legacy browsers
 [data-lch] {
   background-color: var(--in-gamut, var(--out-of-gamut));
 }
+[data-show=hidden] [data-lch] {
+  --out-of-gamut: transparent;
+}
 [data-show=clipped] [data-lch] {
   --out-of-gamut: var(--clipped);
 }
@@ -280,7 +283,7 @@ category: legacy browsers
   --out-of-gamut: var(--fixed);
 }
 
-[style*="--clipped"] + :not([style*="--clipped"]), :not([style*="--clipped"]) + [style*="--clipped"] {
+table:hover [style*="--clipped"] + :not([style*="--clipped"]), table:hover :not([style*="--clipped"]) + [style*="--clipped"] {
   border-left: 1px solid white;
 }
 

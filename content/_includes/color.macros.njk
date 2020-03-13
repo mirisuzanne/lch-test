@@ -1,0 +1,82 @@
+{% macro label(
+  format,
+  l,
+  c,
+  h
+) -%}
+  {% set value = [l, c, h] if (format == 'lch') else [h, c, l] %}
+  <code class="sr-only">{{ format }}({{ value | join(' ') }})</code>
+{%- endmacro %}
+
+{% macro lch_data(l,c,h) -%}
+  data-lch="{{ [l, c, h] | join(',') }}"
+{%- endmacro %}
+
+{% macro var(val, unit='', minus=none) -%}
+  {% set css = 'var(--' + val + ')' %}
+  {%- if
+    val in ['h', 's', 'l']
+    -%}{% if unit
+  %}calc({{ css }} * 1{{ unit }}){%
+    else
+  %}{{ css }}{%
+    endif %}{%- else
+  -%}{{ val + unit }}{%- endif -%}
+{%- endmacro %}
+
+{% macro hsl_style(
+  h,
+  s,
+  l
+) -%}
+  style="--hsl: hsl({{ var(h) }} {{ var(s, '%') }} {{ var(l, '%') }})"
+{%- endmacro %}
+
+{% macro row(format, c,h,var='s') %}
+  <tr class="range">
+  {%- for l in range(0, 100) -%}
+    <td {{
+      hsl_style(
+        var if var == 'h' else h,
+        var if var == 's' else c,
+        var if var == 'l' else l
+      )
+      if (format == 'hsl') else
+      lch_data(l, c, h)
+    }}>
+      {{- label(format, l, c, h) -}}
+    </td>
+  {%- endfor %}
+  </tr>
+{% endmacro %}
+
+{% macro chroma_table(
+  format,
+  chroma
+) %}
+  <table data-table="by-chroma">
+  {%- for hue in range(0, 360, 2) -%}
+    {{ row(format, chroma, hue, 's') }}
+  {%- endfor %}
+  </table>
+{% endmacro %}
+
+{% macro hue_table(
+  format,
+  hue
+) %}
+  <table data-table="by-hue">
+  {%- for chroma in range(0, 100, 2) -%}
+    {{ row(format, chroma, hue, 'h') }}
+  {%- endfor %}
+  </table>
+{% endmacro %}
+
+{% macro settings(content) %}
+  <details class="demo-settings">
+    <summary>Settings</summary>
+    <form class="dropdown">
+      {{ content | safe }}
+    </form>
+  </details>
+{% endmacro %}

@@ -4,7 +4,13 @@ class: markdown
 
 # Exploring CIE lab/LCH Colors
 
-[Play with my (slow) LCH demo »](/lch/)
+## Demos:
+
+- [by `chroma` »](/chroma/)
+- [by `hue` »](/hue/)
+
+Note that `hsl` and `lch` map hues differently,
+so they aren't going to line up exactly here.
 
 ## Other Resources:
 
@@ -37,28 +43,22 @@ resolving out-of-gamut colors
 to the nearest available sRGB color,
 without altering in-gamut values.
 
-I haven't yet found a description of *how*
-to achieve relative-colorimetric rendering.
-For this demo,
-I make an over-simplified gesture that direction --
-lowering the "chroma" value until
+I make an attempt at that in my demos --
+locking both `hue` and `lightness` values,
+while lowering the `chroma` value until
 the color is in-gamut.
-I don't think that's a real solution,
-but neither is the default RGB clipping
-used by [chroma.js](https://github.com/gka/chroma.js),
-which can  end up altering the hue
+That seems to be the accepted solution,
+rather thanclipping RGB channels
+like [chroma.js](https://github.com/gka/chroma.js),
+which can end up altering the hue
 in unpredicatble ways.
 
 You can toggle between the two options
 in the demo "settings" menu,
 or hide out-of-gamut-colors entirely.
-You can also change the overall chroma value --
-just give it time to update.
+You can also change the overall `chroma` or `hue`) value --
+depending on the demo.
+Just give it time to update.
 This isn't optimized for performance,
 and the adjustments take more time
 at higher saturation levels.
-
-## ToDo:
-
-- Are there available algorythms for relative-colorimetric rendering?
-- Can we use them?
